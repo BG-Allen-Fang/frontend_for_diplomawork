@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,14 +7,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {AppBar, Toolbar} from "@mui/material";
-import logo from "./logo.png";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import AppbarCustom from "./AppbarCustom";
 
 const theme = createTheme({
     palette: {
@@ -39,21 +34,7 @@ function SignIn() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <AppBar position={"fixed"}>
-                    <Container fixed>
-                        <Toolbar>
-                            <a href="/">
-                                <img src={logo} alt="Logo" className="barlogo"/>
-                            </a>
-                            <Box mr={3}>
-                                <Button color="inherit" variant="outlined" href="signin" endIcon={<AccountCircleIcon />}>Log in</Button>
-                            </Box>
-                            <Box>
-                                <Button color="secondary" variant="contained" href="signup"endIcon={<PersonAddAltIcon />}>Sign up</Button>
-                            </Box>
-                        </Toolbar>
-                    </Container>
-                </AppBar>
+                <AppbarCustom />
                 <Box
                     sx={{
                         marginTop: 18,
@@ -105,7 +86,7 @@ function SignIn() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="signup.js" variant="body2">
+                                <Link href="signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

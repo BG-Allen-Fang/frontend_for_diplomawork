@@ -10,21 +10,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
-    AppBar,
     FormControl,
     IconButton,
     InputAdornment,
     InputLabel,
-    OutlinedInput,
-    Toolbar
+    OutlinedInput
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import PropTypes from "prop-types";
-import logo from "./logo.png";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
+import AppbarCustom from "./AppbarCustom";
 
 const theme = createTheme({
     palette: {
@@ -90,21 +84,7 @@ export default function SignUp() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <AppBar position={"fixed"}>
-                    <Container fixed>
-                        <Toolbar>
-                            <a href="/">
-                                <img src={logo} alt="Logo" className="barlogo"/>
-                            </a>
-                            <Box mr={3}>
-                                <Button color="inherit" variant="outlined" href="signin" endIcon={<AccountCircleIcon />}>Log in</Button>
-                            </Box>
-                            <Box>
-                                <Button color="secondary" variant="contained" href="signup"endIcon={<PersonAddAltIcon />}>Sign up</Button>
-                            </Box>
-                        </Toolbar>
-                    </Container>
-                </AppBar>
+                <AppbarCustom />
                 <Box
                     sx={{
                         marginTop: 18,
@@ -141,7 +121,6 @@ export default function SignUp() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    required
                                     fullWidth
                                     id="Patronymic"
                                     label="Patronymic"
@@ -209,7 +188,7 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="signin" variant="body2">
+                                <Link href="/signin" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
