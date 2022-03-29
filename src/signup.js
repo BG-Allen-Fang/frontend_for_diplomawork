@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
+    Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
     FormControl,
     IconButton,
     InputAdornment,
@@ -19,6 +20,8 @@ import {
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import PropTypes from "prop-types";
 import AppbarCustom from "./AppbarCustom";
+import ReactPinField from "react-pin-field";
+import "./SingUp.css";
 
 const theme = createTheme({
     palette: {
@@ -50,6 +53,18 @@ phone_number.propTypes = {
 };
 
 export default function SignUp() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -121,7 +136,6 @@ export default function SignUp() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    required
                                     fullWidth
                                     id="Patronymic"
                                     label="Patronymic"
@@ -184,9 +198,27 @@ export default function SignUp() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={handleClickOpen}
                         >
                             Sign Up
                         </Button>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Enter PIN</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                    We have sent you a pin code by email. Please check your email and enter the PIN code sent to you.
+                                </DialogContentText>
+                                <ReactPinField
+                                    length={4}
+                                    secret
+                                    className="pin-field"
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button onClick={handleClose}>Send</Button>
+                            </DialogActions>
+                        </Dialog>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href="signin" variant="body2">

@@ -4,8 +4,10 @@ import AppbarCustom from "./AppbarCustom";
 
 function Home(){
     return (
-        <AppbarCustom />
-    );
+        <div>
+            <AppbarCustom />
+        </div>
+    )
 }
 
 export default Home;
