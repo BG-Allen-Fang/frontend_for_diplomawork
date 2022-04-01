@@ -9,8 +9,9 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AppbarCustom from "./AppbarCustom";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import AppbarCustom from "../appbar_custom/AppbarCustom";
+import {NavLink} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -33,8 +34,8 @@ function SignIn() {
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <AppbarCustom />
+                <CssBaseline/>
+                <AppbarCustom/>
                 <Box
                     sx={{
                         marginTop: 18,
@@ -46,7 +47,7 @@ function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
@@ -68,14 +69,14 @@ function SignIn() {
                             autoComplete="current-password"
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
+                            control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                         >
                             Sign In
                         </Button>
@@ -86,9 +87,9 @@ function SignIn() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="signup" variant="body2">
+                                <NavLink to="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
-                                </Link>
+                                </NavLink>
                             </Grid>
                         </Grid>
                     </Box>

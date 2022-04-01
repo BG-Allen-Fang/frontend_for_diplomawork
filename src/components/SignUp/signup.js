@@ -3,12 +3,11 @@ import {IMaskInput} from "react-imask";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {
     Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
     FormControl,
@@ -19,9 +18,10 @@ import {
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import PropTypes from "prop-types";
-import AppbarCustom from "./AppbarCustom";
+import AppbarCustom from "../appbar_custom/AppbarCustom";
 import ReactPinField from "react-pin-field";
 import "./SingUp.css";
+import {NavLink} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -32,7 +32,7 @@ const theme = createTheme({
 });
 
 const phone_number = React.forwardRef(function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
     return (
         <IMaskInput
             {...other}
@@ -41,7 +41,7 @@ const phone_number = React.forwardRef(function TextMaskCustom(props, ref) {
                 '#': /[1-9]/,
             }}
             inputRef={ref}
-            onAccept={(value) => onChange({ target: { name: props.name, value } })}
+            onAccept={(value) => onChange({target: {name: props.name, value}})}
             overwrite
         />
     );
@@ -64,7 +64,6 @@ export default function SignUp() {
     };
 
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -81,7 +80,7 @@ export default function SignUp() {
     });
 
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setValues({...values, [prop]: event.target.value});
     };
 
     const handleClickShowPassword = () => {
@@ -98,8 +97,8 @@ export default function SignUp() {
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <AppbarCustom />
+                <CssBaseline/>
+                <AppbarCustom/>
                 <Box
                     sx={{
                         marginTop: 18,
@@ -111,7 +110,7 @@ export default function SignUp() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -177,14 +176,14 @@ export default function SignUp() {
                                         onChange={handleChange('password')}
                                         endAdornment={
                                             <InputAdornment position="end">
-                                            <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            >
-                                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {values.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                                </IconButton>
                                             </InputAdornment>
                                         }
                                         label="Password"
@@ -197,7 +196,7 @@ export default function SignUp() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                             onClick={handleClickOpen}
                         >
                             Sign Up
@@ -206,7 +205,8 @@ export default function SignUp() {
                             <DialogTitle>Enter PIN</DialogTitle>
                             <DialogContent>
                                 <DialogContentText>
-                                    We have sent you a pin code by email. Please check your email and enter the PIN code sent to you.
+                                    We have sent you a pin code by email. Please check your email and enter the PIN code
+                                    sent to you.
                                 </DialogContentText>
                                 <ReactPinField
                                     length={4}
@@ -221,9 +221,9 @@ export default function SignUp() {
                         </Dialog>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="signin" variant="body2">
+                                <NavLink to="/signin" variant="body2">
                                     Already have an account? Sign in
-                                </Link>
+                                </NavLink>
                             </Grid>
                         </Grid>
                     </Box>
