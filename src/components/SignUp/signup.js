@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import PropTypes from "prop-types";
-import AppbarCustom from "../appbar_custom/AppbarCustom";
 import ReactPinField from "react-pin-field";
 import "./SingUp.css";
 import {NavLink} from "react-router-dom";
@@ -52,7 +51,7 @@ phone_number.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function SignUp() {
+const SignUp = (props) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -98,10 +97,9 @@ export default function SignUp() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
-                <AppbarCustom/>
                 <Box
                     sx={{
-                        marginTop: 18,
+                        marginTop: 10,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -232,3 +230,5 @@ export default function SignUp() {
         </ThemeProvider>
     );
 }
+
+export default SignUp;

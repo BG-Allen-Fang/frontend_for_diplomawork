@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import AppbarCustom from "../appbar_custom/AppbarCustom";
 import {NavLink} from "react-router-dom";
 
 const theme = createTheme({
@@ -21,7 +20,7 @@ const theme = createTheme({
     },
 });
 
-function SignIn() {
+const SignIn = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -35,10 +34,9 @@ function SignIn() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
-                <AppbarCustom/>
                 <Box
                     sx={{
-                        marginTop: 18,
+                        marginTop: 10,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center'
