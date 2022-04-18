@@ -1,14 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import store from "./redux/redux";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-const vacancies = [1, 2, 3, 4, 5, 6];
+let rerenderEntireTree = (state) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App state={state} dispatch={store.dispatch.bind(store)} />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App vacancies={vacancies} />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+rerenderEntireTree(store.getState());
 
+store.subscribe(rerenderEntireTree)

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {NavLink} from "react-router-dom";
+import {UpdateEmailAddress_ActionCreator} from "../../redux/signInReducer";
 
 const theme = createTheme({
     palette: {
@@ -21,21 +22,26 @@ const theme = createTheme({
 });
 
 const SignIn = (props) => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // };
 
+    const handleTextChange = (e) => {
+        let text = e.target.value;
+        props.dispatch(UpdateEmailAddress_ActionCreator(text));
+    };
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container height="100vh" component="main" maxWidth="xs" >
                 <CssBaseline/>
                 <Box
                     sx={{
+                        height: '90vh',
                         marginTop: 10,
                         display: 'flex',
                         flexDirection: 'column',
@@ -45,11 +51,13 @@ const SignIn = (props) => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
+                    <Box component="form" noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
                             fullWidth
+                            value={props.signInPage.newEmailAddressText}
+                            onChange={handleTextChange}
                             id="email"
                             label="Email Address"
                             name="email"

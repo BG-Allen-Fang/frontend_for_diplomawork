@@ -14,9 +14,9 @@ const App = (props) => {
             <AppbarCustom/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/signin" element={<SignIn/>}/>
-                <Route path="/signup" element={<SignUp/>}/>
-                <Route path="/vacancy" element={<Vacancy vacancies={props.vacancies} />}/>
+                <Route path="/signin" element={<SignIn signInPage={props.state.signInPage} dispatch={props.dispatch} />}/>
+                <Route path="/signup" element={<SignUp signUpPage={props.state.signUpPage} dispatch={props.dispatch} />}/>
+                <Route path="/vacancy" element={<Vacancy vacancyPage={props.state.vacancyPage} />}/>
             </Routes>
             <FooterCustom/>
         </Router>

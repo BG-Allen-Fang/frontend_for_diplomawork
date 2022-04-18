@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import ReactPinField from "react-pin-field";
 import "./SingUp.css";
 import {NavLink} from "react-router-dom";
+import {updateFirstName_ActionCreator} from "../../redux/signUpReducer";
 
 const theme = createTheme({
     palette: {
@@ -62,7 +63,6 @@ const SignUp = (props) => {
         setOpen(false);
     };
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -71,12 +71,16 @@ const SignUp = (props) => {
             password: data.get('password'),
         });
     };
-
     const [values, setValues] = React.useState({
         password: '',
         showPassword: false,
         phone_number: '',
     });
+
+    const handleTextChange = (e) => {
+        let text = e.target.value;
+        props.dispatch(updateFirstName_ActionCreator(text));
+    };
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
@@ -92,6 +96,7 @@ const SignUp = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -113,6 +118,8 @@ const SignUp = (props) => {
                             <Grid item xs={12}>
                                 <TextField
                                     autoComplete="given-name"
+                                    value={props.signUpPage.newFirstNameText}
+                                    onChange={handleTextChange}
                                     name="firstName"
                                     required
                                     fullWidth

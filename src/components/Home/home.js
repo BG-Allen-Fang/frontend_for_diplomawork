@@ -4,7 +4,7 @@ import { Box} from "@mui/material";
 import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 
-const Home = (props) => {
+const Home = () => {
     return (
         <Box>
             <Box className="hero-image" >
@@ -13,7 +13,7 @@ const Home = (props) => {
                     <p>concurs</p>
                 </Box>
             </Box>
-            <Button sx={{margin: 5}} color="secondary" variant="contained" component={Link} to="/vacancy">Sign up</Button>
+            <Button sx={{margin: 5}} color="secondary" variant="contained" component={Link} to="/vacancy">Vacancies</Button>
         </Box>
     )
 }
