@@ -15,6 +15,7 @@ let initialState = {
 };
 
 const signUpReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case UPDATE_FIRST_NAME:
             state.newFirstNameText = action.newText;
