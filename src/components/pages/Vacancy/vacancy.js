@@ -12,8 +12,10 @@ import Container from '@mui/material/Container';
 
 
 const Vacancy = (props) => {
+    const vacancies = props.vacancyPage.vacancies;
+
     let vacanciesElements =
-        props.vacancyPage.vacancies.map((v) => (
+        vacancies.map((v) => (
             <Grid item key={v} xs={12} sm={6} md={4}>
                 <Card
                     sx={{height: '100%', display: 'flex', flexDirection: 'column'}}

@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {NavLink} from "react-router-dom";
-import {UpdateEmailAddress_ActionCreator} from "../../redux/signInReducer";
 
 const theme = createTheme({
     palette: {
@@ -31,9 +30,11 @@ const SignIn = (props) => {
     //     });
     // };
 
+    const newEmailText = props.signInPage.newEmailAddressText;
+
     const handleTextChange = (e) => {
         let text = e.target.value;
-        props.dispatch(UpdateEmailAddress_ActionCreator(text));
+        props.onEmailTextChange(text);
     };
     return (
         <ThemeProvider theme={theme}>
@@ -56,7 +57,7 @@ const SignIn = (props) => {
                             margin="normal"
                             required
                             fullWidth
-                            value={props.signInPage.newEmailAddressText}
+                            value={ newEmailText }
                             onChange={handleTextChange}
                             id="email"
                             label="Email Address"

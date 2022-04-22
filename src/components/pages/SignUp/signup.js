@@ -21,7 +21,6 @@ import PropTypes from "prop-types";
 import ReactPinField from "react-pin-field";
 import "./SingUp.css";
 import {NavLink} from "react-router-dom";
-import {updateFirstName_ActionCreator} from "../../redux/signUpReducer";
 
 const theme = createTheme({
     palette: {
@@ -53,37 +52,45 @@ phone_number.propTypes = {
 };
 
 const SignUp = (props) => {
-    const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // Constants
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const newFirstNameText = props.signUpPage.newFirstNameText;
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+
+    // Functions
+
     const [values, setValues] = React.useState({
         password: '',
         showPassword: false,
         phone_number: '',
+        dialogPinOpen:false,
     });
 
-    const handleTextChange = (e) => {
-        let text = e.target.value;
-        props.dispatch(updateFirstName_ActionCreator(text));
+    const handleChange = (prop) => (event) => {
+        setValues({
+            ...values,
+            [prop]: event.target.value
+        });
     };
 
-    const handleChange = (prop) => (event) => {
-        setValues({...values, [prop]: event.target.value});
+    const handleClickOpen = () => {
+        setValues({
+            ...values,
+            dialogPinOpen: true,
+        });
+    };
+
+    const handleClose = () => {
+        setValues({
+            ...values,
+            dialogPinOpen: false,
+        });
+    };
+
+    const onFirstNameTextChange = (e) => {
+        let text = e.target.value;
+        props.onFirstNameTextChange(text);
     };
 
     const handleClickShowPassword = () => {
@@ -97,6 +104,14 @@ const SignUp = (props) => {
         event.preventDefault();
     };
 
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // };
 
     return (
         <ThemeProvider theme={theme}>
@@ -113,13 +128,13 @@ const SignUp = (props) => {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
+                    <Box component="form" noValidate sx={{mt: 3}}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
                                     autoComplete="given-name"
-                                    value={props.signUpPage.newFirstNameText}
-                                    onChange={handleTextChange}
+                                    value={newFirstNameText}
+                                    onChange={onFirstNameTextChange}
                                     name="firstName"
                                     required
                                     fullWidth
@@ -198,15 +213,14 @@ const SignUp = (props) => {
 
                         </Grid>
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            onClick={handleClickOpen}
+                            onClick={() => handleClickOpen()}
                         >
                             Sign Up
                         </Button>
-                        <Dialog open={open} onClose={handleClose}>
+                        <Dialog open={values.dialogPinOpen} onClose={() => handleClose()}>
                             <DialogTitle>Enter PIN</DialogTitle>
                             <DialogContent>
                                 <DialogContentText>
@@ -220,8 +234,8 @@ const SignUp = (props) => {
                                 />
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose}>Cancel</Button>
-                                <Button onClick={handleClose}>Send</Button>
+                                <Button onClick={() => handleClose()}>Cancel</Button>
+                                <Button onClick={() => handleClose()}>Send</Button>
                             </DialogActions>
                         </Dialog>
                         <Grid container justifyContent="flex-end">

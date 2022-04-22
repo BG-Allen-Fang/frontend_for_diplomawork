@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import {
     AppBar,
     Avatar,
@@ -11,19 +10,15 @@ import {
     Tooltip,
     useScrollTrigger
 } from "@mui/material";
-import logo from '../../Images/logo.png';
+import logo from '../../../Images/logo.png';
 import "./AppbarProfile.css"
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import PendingIcon from '@mui/icons-material/Pending';
-import PersonIcon from '@mui/icons-material/Person';
 import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import {createTheme} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 import Box from "@mui/material/Box";
-import {Logout, Settings} from "@mui/icons-material";
+import {Logout} from "@mui/icons-material";
 
 const theme = createTheme({
     palette: {

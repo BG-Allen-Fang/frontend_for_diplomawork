@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {AppBar, CssBaseline, Slide, ThemeProvider, Toolbar, useScrollTrigger} from "@mui/material";
-import logo from '../../Images/logo.png';
+import logo from '../../../Images/logo.png';
 import "./AppbarCustom.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';

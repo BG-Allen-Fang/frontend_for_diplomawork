@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import {Grid, styled} from "@mui/material";
 import {green} from "@mui/material/colors";
 import CardMedia from "@mui/material/CardMedia";
-import aitu_white_logo from "../../Images/aitu-logo_white.png"
+import aitu_white_logo from "../../../Images/aitu-logo_white.png"
 
 
 const StyledLink = styled(Link)`
