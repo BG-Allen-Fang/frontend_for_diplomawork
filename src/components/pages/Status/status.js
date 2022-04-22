@@ -5,13 +5,11 @@ import Container from '@mui/material/Container';
 import {ThemeProvider} from '@mui/material/styles';
 import "./status.css"
 import Card from "@mui/material/Card";
-import {CardHeader, createTheme, Divider, Stack, Typography} from "@mui/material";
+import { createTheme, Divider, Stack} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Button from "@mui/material/Button";
 import * as PropTypes from "prop-types";
-import { IconName } from "react-icons/fc";
-import CancelIcon from '@mui/icons-material/Cancel';
 
 const theme = createTheme({
     palette: {
