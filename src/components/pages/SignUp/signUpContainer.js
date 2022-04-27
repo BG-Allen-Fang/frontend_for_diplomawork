@@ -2,27 +2,21 @@ import * as React from 'react';
 import "./SingUp.css";
 import {updateFirstName_ActionCreator} from "../../../redux/signUpReducer";
 import SignUp from "./signup";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
-const SignUpContainer = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {store => {
-                const signUpPage = store.getState().signUpPage;
-
-                const onFirstNameTextChange = (text) => {
-                    store.dispatch(updateFirstName_ActionCreator(text));
-                };
-                return (
-                    <SignUp
-                        onFirstNameTextChange={onFirstNameTextChange}
-                        signUpPage={signUpPage}
-                    />
-                )
-            }}
-        </StoreContext.Consumer>
-    );
+let mapStateToProps = (state) => {
+    return{
+        signUpPage: state.signUpPage
+    }
 }
+let mapDispatchToProps = (dispatch) => {
+    return{
+        onFirstNameTextChange: (text) => {
+            dispatch(updateFirstName_ActionCreator(text));
+        },
+    }
+}
+
+const SignUpContainer = connect(mapStateToProps,mapDispatchToProps)(SignUp)
 
 export default SignUpContainer;

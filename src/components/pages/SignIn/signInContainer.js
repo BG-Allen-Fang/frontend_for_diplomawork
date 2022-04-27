@@ -1,28 +1,22 @@
 import * as React from 'react';
 import './signin';
-import StoreContext from "../../../StoreContext";
 import SignIn from "./signin";
 import {UpdateEmailAddress_ActionCreator} from "../../../redux/signInReducer";
+import {connect} from "react-redux";
 
-
-const SignInContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {store => {
-                const signInPage = store.getState().signInPage;
-
-                const onEmailTextChange = (text) => {
-                    store.dispatch(UpdateEmailAddress_ActionCreator(text));
-                };
-                return (
-                    <SignIn
-                        signInPage={signInPage}
-                        onEmailTextChange={onEmailTextChange}
-                    />
-                )
-            }}
-        </StoreContext.Consumer>
-    );
+let mapStateToProps = (state) => {
+    return{
+        signInPage: state.signInPage
+    }
 }
+let mapDispatchToProps = (dispatch) => {
+    return{
+        onEmailTextChange: (text) => {
+            dispatch(UpdateEmailAddress_ActionCreator(text));
+        },
+    }
+}
+
+const SignInContainer = connect(mapStateToProps,mapDispatchToProps)(SignIn)
 
 export default SignInContainer;

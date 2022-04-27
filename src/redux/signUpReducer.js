@@ -18,8 +18,10 @@ const signUpReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case UPDATE_FIRST_NAME:
-            state.newFirstNameText = action.newText;
-            return state;
+            return{
+                ...state,
+                newFirstNameText: action.newText,
+            }
         // case UPDATE_LAST_NAME:
         // case UPDATE_PATRONYMIC:
         // case UPDATE_PHONE_NUMBER:
