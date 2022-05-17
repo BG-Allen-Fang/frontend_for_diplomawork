@@ -9,6 +9,7 @@ import Status from "./components/pages/Status/status";
 import SignInContainer from "./components/pages/SignIn/signInContainer";
 import SignUpContainer from "./components/pages/SignUp/signUpContainer";
 import VacancyContainer from "./components/pages/Vacancy/vacancyContainer";
+import Request from "./components/pages/request/request";
 
 const App = () => {
     return (
@@ -17,10 +18,12 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/profile/:id" element={<Profile/>}/>
                 <Route path="/status" element={<Status/>}/>
                 <Route path="/signin" element={<SignInContainer />}/>
                 <Route path="/signup" element={<SignUpContainer />}/>
                 <Route path="/vacancy" element={<VacancyContainer />}/>
+                <Route path="/request" element={<Request />}/>
             </Routes>
             <FooterCustom/>
         </Router>
