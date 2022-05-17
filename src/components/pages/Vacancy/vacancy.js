@@ -9,14 +9,20 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import * as axios from "axios";
+
 
 
 const Vacancy = (props) => {
     const vacancies = props.vacancyPage.vacancies;
 
+    if ( 1 === 1 ){
+        axios.get("http://localhost:8080/api/v1/hiring/vacancy/get-all").then();
+    }
+
     let vacanciesElements =
         vacancies.map((v) => (
-            <Grid item key={v} xs={12} sm={6} md={4}>
+            <Grid item key={v.id} xs={12} sm={6} md={4}>
                 <Card
                     sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
                 >

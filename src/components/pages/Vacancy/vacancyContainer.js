@@ -1,20 +1,17 @@
 import * as React from 'react';
 import Vacancy from "./vacancy";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
-
-const VacancyContainer = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {store =>{
-                const vacancyPage = store.getState().vacancyPage;
-                return(
-                    <Vacancy vacancyPage={vacancyPage} />
-                );
-            }}
-        </StoreContext.Consumer>
-    );
+let mapStateToProps = (state) => {
+    return{
+        vacancyPage: state.vacancyPage
+    }
 }
+let mapDispatchToProps = (dispatch) => {
+    return{
+    }
+}
+
+const VacancyContainer = connect(mapStateToProps,mapDispatchToProps)(Vacancy)
 
 export default VacancyContainer;

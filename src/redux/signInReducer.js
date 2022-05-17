@@ -10,8 +10,11 @@ const signInReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case UPDATE_EMAIL_ADDRESS:
-            state.newEmailAddressText = action.newText;
-            return state;
+            return {
+                ...state,
+                newEmailAddressText: action.newText,
+            }
+
         // case UPDATE_PASSWORD:
 
         default:
