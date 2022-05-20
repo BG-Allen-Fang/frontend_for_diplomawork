@@ -1,6 +1,6 @@
 import * as React from 'react';
 import "./SingUp.css";
-import {updateFirstName_ActionCreator} from "../../../redux/signUpReducer";
+import {updateFirstName_ActionCreator} from "../../../../redux/signUpReducer";
 import SignUp from "./signup";
 import {connect} from "react-redux";
 

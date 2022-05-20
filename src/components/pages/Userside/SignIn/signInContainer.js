@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './signin';
 import SignIn from "./signin";
-import {UpdateEmailAddress_ActionCreator} from "../../../redux/signInReducer";
+import {UpdateEmailAddress_ActionCreator} from "../../../../redux/signInReducer";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
