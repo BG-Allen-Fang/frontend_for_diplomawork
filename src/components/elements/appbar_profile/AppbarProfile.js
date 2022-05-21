@@ -10,7 +10,7 @@ import {
     Tooltip,
     useScrollTrigger
 } from "@mui/material";
-import logo from '../../../Images/logo.png';
+import logo from '../../../images/logo.png';
 import "./AppbarProfile.css"
 import PendingIcon from '@mui/icons-material/Pending';
 import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';

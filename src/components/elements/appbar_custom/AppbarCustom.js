@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {AppBar, CssBaseline, Slide, ThemeProvider, Toolbar, useScrollTrigger} from "@mui/material";
-import logo from '../../../Images/logo.png';
+import logo from '../../../images/logo.png';
 import "./AppbarCustom.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
@@ -31,6 +31,8 @@ function HideOnScroll(props) {
 }
 
 const AppbarCustom = (props) => {
+    const user = props.user;
+
     return (
         <React.Fragment>
             <CssBaseline/>
@@ -44,10 +46,25 @@ const AppbarCustom = (props) => {
                             </Link>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             </Typography>
-                            <Button sx={{mr: 3}} color="inherit" variant="outlined" component={Link} to="/signin"
-                                    endIcon={<AccountCircleIcon/>}>Log in</Button>
-                            <Button sx={{mr: 5}} color="secondary" variant="contained" component={Link} to="/signup"
-                                    endIcon={<PersonAddAltIcon/>}>Sign up</Button>
+
+                            {user ? (
+                                <div className="navbar-nav ml-auto">
+                                    <Button sx={{mr: 3}} color="inherit" variant="outlined" component={Link} to="/profile"
+                                            >{ user.name } profile</Button>
+                                    <Button sx={{mr: 5}} color="secondary" variant="contained" onClick={props.logOut} component={Link} to="/signin"
+                                            >logout</Button>
+                                </div>
+                            ) : (
+                                <div >
+                                    <Button sx={{mr: 3}} color="inherit" variant="outlined" component={Link} to="/signin"
+                                            endIcon={<AccountCircleIcon/>}>Log in</Button>
+                                    <Button sx={{mr: 5}} color="secondary" variant="contained" component={Link} to="/signup"
+                                            endIcon={<PersonAddAltIcon/>}>Sign up</Button>
+                                </div>
+                            )}
+
+
+
                         </Toolbar>
                     </AppBar>
                 </HideOnScroll>
