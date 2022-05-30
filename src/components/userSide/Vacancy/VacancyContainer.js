@@ -1,41 +1,26 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {setVacancy} from "../../../actions/vacancy";
+import {getAllVacancy} from "../../../actions/vacancy";
 import Vacancy from "./Vacancy";
-import { withRouter } from "react-router";
-import VacancyService from "../../../services/vacancy.service";
-import {getVacancyByIdDispatch} from "../../../actions/vacancy";
+import {withRouter} from "react-router";
+import {useEffect} from "react";
 
-class VacancyContainer extends React.Component {
+let VacancyContainer = (props) => {
 
-    componentDidMount() {
+    useEffect(() => {
+        const {dispatch} = props;
+        dispatch(getAllVacancy());
+    }, [])
 
-        VacancyService.getAllRequest().then(
-            response => {
-                this.props.setVacancy(response.data)
-            },
-            error => {
-                this.setState({
-                    content:
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString()
-                });
-            }
-        );
-    }
-
-    render() {
-        return <Vacancy {...this.props} vacancies={this.props.vacancies} />
-    }
+    return <Vacancy {...props} vacancies={props.vacancies}/>
 }
 
 let mapStateToProps = (state) => {
-    return{
+    return {
         vacancies: state.vacancyPage.vacancies
     }
 }
 
 let UrlDataContainerComponent = withRouter(VacancyContainer);
 
-export default connect(mapStateToProps, {setVacancy,getVacancyByIdDispatch})(UrlDataContainerComponent)
+export default connect(mapStateToProps)(UrlDataContainerComponent)

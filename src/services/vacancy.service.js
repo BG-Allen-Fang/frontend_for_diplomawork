@@ -5,7 +5,7 @@ const API_URL = "http://localhost:8080/api/v1/hiring/vacancy/";
 
 class VacancyService {
     getAllRequest() {
-        return axios.get(API_URL + "get-all");
+        return  axios.get(API_URL + "get-all");
     }
 
     getByIdRequest(id) {

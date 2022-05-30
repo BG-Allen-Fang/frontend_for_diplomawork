@@ -42,24 +42,24 @@ const columns = [
         }
     },
     {
-        name: "company",
-        label: "Company",
+        name: "degree",
+        label: "Degree",
         options: {
             filter: true,
             sort: true,
         }
     },
     {
-        name: "city",
-        label: "City",
+        name: "title",
+        label: "Title",
         options: {
             filter: true,
             sort: true,
         }
     },
     {
-        name: "state",
-        label: "State",
+        name: "vacancy",
+        label: "Vacancy",
         options: {
             filter: true,
             sort: true,
@@ -100,22 +100,10 @@ const columns = [
 ];
 
 const data = [
-    { name: "Aniyar Kaliyev", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "Alen Tyakbayev", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Yerassyl Bolat", company: "Test Corp", city: "Tampa", state: "FL" },
-    { name: "Aibyn Sagyndyk", company: "Test Corp", city: "Dallas", state: "TX" },
-    { name: "Prabhakar Linwood", company: "Example Inc.", city: "Hartford", state: "CT"},
-    { name: "Esperanza Susanne",  company: "Example Inc.", city: "Hartford", state: "CT"},
-    { name: "Christian Birgitte", company: "Example Inc.", city: "Tampa", state: "FL"},
-    { name: "Meral Elias", company: "Example Inc.", city: "Hartford", state: "CT"},
-    { name: "Deep Pau", company: "Example Inc.", city: "Yonkers", state: "NY"},
-    { name: "Sebastiana Hani", company: "Example Inc.", city: "Dallas", state: "TX"},
-    { name: "Marciano Oihana", company: "Example Inc.", city: "Yonkers", state: "NY"},
-    { name: "Brigid Ankur", company: "Example Inc.", city: "Dallas", state: "TX"},
-    { name: "Anna Siranush", company: "Example Inc.", city: "Yonkers", state:"NY"},
-    { name: "Avram Sylva", company: "Example Inc.", city: "Hartford", state: "CT"},
-    { name: "Serafima Babatunde", company: "Example Inc.", city: "Tampa", state: "FL"},
-    { name: "Gaston Festus", company: "Example Inc.", city: "Tampa", state: "FL"},
+    { name: "Aniyar Kaliyev", degree: "Bachelor", title: "Teacher", vacancy: "Senior lecturer" },
+    { name: "Alen Tyakbayev", degree: "Master", title: "Senior lecturer", vacancy: "Senior lecturer" },
+    { name: "Yerassyl Bolat", degree: "PhD", title: "Associated professor", vacancy: "Professor" },
+    { name: "Aibyn Sagyndyk", degree: "PhD", title: "Senior lecturer", vacancy: "Associated professor" },
 ];
 
 const options = {

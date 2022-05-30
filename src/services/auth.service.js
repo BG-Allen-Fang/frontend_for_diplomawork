@@ -21,8 +21,6 @@ class AuthService {
         localStorage.removeItem("user");
     }
 
-    //http://localhost:8080/api/v1/user/activate?email=&pin_code=
-
     userActivation(email, pin_code) {
         return axios.post( API_URL + "activate", null, {params:{
                 email: email,

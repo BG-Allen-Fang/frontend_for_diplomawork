@@ -14,4 +14,18 @@ export const getVacancyByIdDispatch = (id) => (dispatch) => {
     );
 };
 
-export const setVacancy = (vacancies) => ({type: SET_VACANCY, payload: vacancies});
+
+export const getAllVacancy = () => (dispatch) => {
+    return VacancyService.getAllRequest().then(
+        (response) => {
+            dispatch({
+                type: SET_VACANCY,
+                payload: response.data,
+            });
+
+            return Promise.resolve();
+        }
+    );
+};
+
+// export const setVacancy = (vacancies) => ({type: SET_VACANCY, payload: vacancies});

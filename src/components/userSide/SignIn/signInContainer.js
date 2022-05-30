@@ -7,8 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import {NavLink, Redirect} from "react-router-dom";
@@ -68,7 +66,7 @@ class SignInContainer extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             dispatch(login(this.state.email, this.state.password))
                 .then(() => {
-                    history.push("/profile");
+                    history.push("/");
                     window.location.reload();
                 })
                 .catch(() => {
@@ -87,7 +85,7 @@ class SignInContainer extends Component {
         const { isLoggedIn, message } = this.props;
 
         if (isLoggedIn) {
-            return <Redirect to="/profile" />;
+            return <Redirect to="/" />;
         }
 
         const theme = createTheme({
@@ -144,10 +142,10 @@ class SignInContainer extends Component {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary"/>}
-                                label="Remember me"
-                            />
+                            {/*<FormControlLabel*/}
+                            {/*    control={<Checkbox value="remember" color="primary"/>}*/}
+                            {/*    label="Remember me"*/}
+                            {/*/>*/}
                             <Button
                                 disabled={this.state.loading}
                                 type="submit"

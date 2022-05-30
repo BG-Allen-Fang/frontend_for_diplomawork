@@ -8,13 +8,10 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
+import moment from 'moment';
 
 let Vacancy = (props) => {
-    const getByIdButton = (e) => {
-        let id = e.target.value;
-        props.getVacancyByIdDispatch(id)
-
-    }
 
     return (
         <Box sx={{height: "90vh"}}>
@@ -31,22 +28,40 @@ let Vacancy = (props) => {
                                             <Typography gutterBottom variant="h5" component="h2">
                                                 {v.academicTitleDtoResponse.title}
                                             </Typography>
-                                            <Typography>
+                                            <Typography gutterBottom>
                                                 {v.department.departmentName}
                                             </Typography>
+                                            <Grid container spacing={2}>
+                                                <Grid item xs={6}>
+                                                    <Typography variant="caption">
+                                                        {moment(v.start_date).format('LL')}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={6}>
+                                                    <Typography variant="caption">
+                                                        {moment(v.finish_date).format('LL')}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+
+
                                         </CardContent>
                                         <CardActions>
-                                            <Button size="small">View</Button>
+                                            <Button size="small"
+                                                    component={Link}
+                                                    to={{
+                                                        pathname: "/profile",
+                                                        state: {
+                                                            vacancy: v,
+                                                            vacancies: props.vacancies
+                                                        },
+                                                    }}>Apply</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>
                             ))
                         }
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card>
-                                <Button onClick={getByIdButton} size="small" value={2}>Get 1 more</Button>
-                            </Card>
-                        </Grid>
+
                     </Grid>
                 </Container>
             </main>

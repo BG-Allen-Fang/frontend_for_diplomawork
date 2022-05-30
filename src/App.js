@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Router, Switch, Route} from "react-router-dom"
 import Home from "./components/userSide/Home/home";
 import FooterCustom from "./components/elements/Footer/FooterCustom";
-import Profile from "./components/userSide/Profile/profile";
+
 import Status from "./components/userSide/Status/status";
 import SignInContainer from "./components/userSide/SignIn/signInContainer";
 import SignUpContainer from "./components/userSide/SignUp/signUpContainer";
@@ -13,6 +13,8 @@ import EventBus from "./common/EventBus";
 import {clearMessage} from "./actions/message";
 import {history} from "./helpers/history";
 import {connect} from "react-redux";
+
+import Profile from "./components/userSide/profile/profile";
 import ForgotPass from "./components/userSide/SignIn/forgotPass.component";
 import Request from "./components/commissionSide/request/request";
 import Dashboard from "./components/commissionSide/Dashboard/dashboard";
@@ -27,7 +29,7 @@ class App extends Component {
             user: undefined,
         };
 
-        history.listen((location) => {
+        history.listen(() => {
             props.dispatch(clearMessage()); // clear message when changing location
         });
     }
@@ -47,7 +49,6 @@ class App extends Component {
     }
 
     render() {
-        const {currentUser} = this.state;
 
         return (
             <Router history={history}>
@@ -57,7 +58,7 @@ class App extends Component {
                            render={() => <Home/>}/>
                     <Route path="/profile"
                            render={() => <Profile/>}/>
-                    <Route path="/status/:statusId"
+                    <Route path="/status/:statusId?"
                            render={() => <Status/>}/>
                     <Route path="/signin"
                            render={() => <SignInContainer/>}/>

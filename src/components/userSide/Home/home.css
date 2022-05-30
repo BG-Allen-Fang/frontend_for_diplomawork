@@ -1,5 +1,5 @@
 .hero-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Astana_IT_University.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../images/Astana_IT_University.jpg");
     height: 92vh;
     background-position: center;
     background-repeat: no-repeat;

@@ -55,7 +55,6 @@ phone_number.propTypes = {
 };
 
 const SignUp = (props) => {
-    const {message} = props;
 
     const [values, setValues] = React.useState({
         name: '',
@@ -87,58 +86,29 @@ const SignUp = (props) => {
     }
 
     const handleChange = (prop) => (event) => {
-
-        setValues({
-            ...values,
-            [prop]: event.target.value
-        });
+        setValues({...values, [prop]: event.target.value});
     };
     const handleChangePin = (prop) => (event) => {
-
-        setValues({
-            ...values,
-            [prop]: event
-        });
+        setValues({...values, [prop]: event});
     };
     const handleClickOpen = () => {
-
         props.dispatch(
-            register(
-                values.name,
-                values.lastName,
-                values.patronymic,
-                values.phone_number,
-                values.email,
-                values.password
+            register(values.name, values.lastName,
+                values.patronymic, values.phone_number,
+                values.email, values.password
             )
         ).then(() => {
-            setValues({
-                ...values,
-                successful: true,
-            });
-            setValues({
-                ...values,
-                dialogPinOpen: true,
-            });
+            setValues({...values, successful: true,});
+            setValues({...values, dialogPinOpen: true,});
         }).then(() => {
-            props.dispatch(
-                pin_code(values.email)
-            )
+            props.dispatch(pin_code(values.email))
         }).catch(() => {
-            setValues({
-                ...values,
-                successful: false,
-            });
+            setValues({...values, successful: false,});
         });
-
-
     };
     const handleClose = () => {
-        setValues({
-            ...values,
-            dialogPinOpen: false,
-        });
-    };
+        setValues({...values, dialogPinOpen: false,});
+    }
     const handleClickShowPassword = () => {
         setValues({
             ...values,

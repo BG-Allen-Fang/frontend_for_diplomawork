@@ -1,11 +1,17 @@
 import React, {Component} from "react";
-import Input from "react-validation/build/input";
 import {isEmail} from "validator";
-
 import {connect} from "react-redux";
 import {pin_code, userForgotPass} from "../../../actions/auth";
 import Form from "react-validation/build/form";
 import {Redirect} from "react-router-dom";
+import {createTheme} from "@mui/material/styles";
+import {CssBaseline, ThemeProvider} from "@mui/material";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
 
 const required = (value) => {
     if (!value) {
@@ -27,6 +33,13 @@ const email = (value) => {
     }
 };
 
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#192F59',
+        },
+    },
+});
 
 const vPin_code = (value) => {
     if (value.length < 4 || value.length > 4) {
@@ -110,72 +123,101 @@ class ForgotPass extends Component {
         }
 
         return (
+            <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
 
-            <div className="col-md-12">
-                <div className="card card-container">
-                    <Form>
-                        <img
-                            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                            alt="profile-img"
-                            className="profile-img-card"
-                        />
-                        {!this.state.emailSuccessful && (
-                            <div>
-                                <div>
-                                    <p>We send pin code to you're email.
-                                        Plese write your email here:</p>
-                                    <label htmlFor="email">Email:</label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="email"
-                                        value={this.state.email}
-                                        onChange={this.onChangeEmail}
-                                        validations={[required, email]}
-                                    />
-                                </div>
-                                <div>
-                                    <button onClick={this.createPinCode} className="btn btn-primary btn-block">Send
-                                    </button>
-                                </div>
-                            </div>
+                        <Typography component="h1" variant="h5">
+                            Forgot Password
+                        </Typography>
+                        <Box component="form">
+                            <Form>
+                                {!this.state.emailSuccessful && (
+                                    <div>
+                                        <div>
+                                            <p>We send pin code to you're email</p>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    required
+                                                    fullWidth
+                                                    id="email"
+                                                    label="Email Address"
+                                                    name="email"
+                                                    autoComplete="email"
+                                                    value={this.state.email}
+                                                    onChange={this.onChangeEmail}
+                                                    validations={[required, email]}
+                                                />
+                                            </Grid>
+                                        </div>
+                                        <div>
+                                            <Button
+                                                fullWidth
+                                                variant="contained"
+                                                sx={{mt: 3, mb: 2}}
+                                                onClick={this.createPinCode}
+                                            >
+                                                Send
+                                            </Button>
+                                        </div>
+                                    </div>
 
-                        )}
-                        {this.state.emailSuccessful && (
-                            <div>
-                                <div>
-                                    <p>We send pin code to you're email.
-                                        Plese write your pin code here:</p>
-                                    <label htmlFor="pin_code">Pin Code:</label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="pin_code"
-                                        value={this.state.pin_code}
-                                        onChange={this.onChangePin_code}
-                                        validations={[required, vPin_code]}
-                                    />
-                                </div>
-                                <div>
-                                    <button onClick={this.userForgotPass} className="btn btn-primary btn-block">Send
-                                    </button>
-                                </div>
-                            </div>
+                                )}
+                                {this.state.emailSuccessful && (
+                                    <div>
+                                        <div>
+                                            <p>Please write your pin code here</p>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    required
+                                                    fullWidth
+                                                    label="Pin-code"
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="pin_code"
+                                                    value={this.state.pin_code}
+                                                    onChange={this.onChangePin_code}
+                                                    validations={[required, vPin_code]}
+                                                />
+                                            </Grid>
+                                        </div>
+                                        <div>
+                                            <Button
+                                                fullWidth
+                                                variant="contained"
+                                                sx={{mt: 3, mb: 2}}
+                                                onClick={this.userForgotPass}
+                                            >
+                                                Send
+                                            </Button>
+                                        </div>
+                                    </div>
 
-                        )}
+                                )}
 
-                        {message && (
-                            <div className="form-group">
-                                <div
-                                    className={this.state.emailSuccessful ? "alert alert-success" : "alert alert-danger"}
-                                    role="alert">
-                                    {message}
-                                </div>
-                            </div>
-                        )}
-                    </Form>
-                </div>
-            </div>
+                                {message && (
+                                    <div className="form-group">
+                                        <div
+                                            className={this.state.emailSuccessful ? "alert alert-success" : "alert alert-danger"}
+                                            role="alert">
+                                            {message}
+                                        </div>
+                                    </div>
+                                )}
+                            </Form>
+
+                        </Box>
+                    </Box>
+                </Container>
+            </ThemeProvider>
         );
     }
 }
