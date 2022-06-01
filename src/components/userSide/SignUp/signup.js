@@ -22,7 +22,7 @@ import ReactPinField from "react-pin-field";
 import "./SingUp.css";
 import {NavLink, Redirect} from "react-router-dom";
 import Form from "react-validation/build/form";
-import {pin_code, register, userActivation} from "../../../actions/auth";
+import {pin_code, register, userActivation} from "../../../actions/userSide/auth";
 
 
 const theme = createTheme({

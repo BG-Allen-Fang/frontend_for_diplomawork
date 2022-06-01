@@ -12,7 +12,7 @@ import {
     FORGOT_PASS_FAIL,
     CHANGE_PASS_SUCCESS,
     CHANGE_PASS_FAIL,
-} from "../../actions/types";
+} from "../../../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
 const initialState = user

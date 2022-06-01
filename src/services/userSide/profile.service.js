@@ -1,5 +1,5 @@
 import axios from "axios";
-import authHeader from "./auth-header";
+import authHeader from "../auth-header";
 
 const BASE_URL = "http://localhost:8080/api/v1/";
 
@@ -48,6 +48,19 @@ class ProfileService {
             experience, scientificInterests, education
         }, {headers: authHeader()});
     }
+    userProfessionalInfoUpdate(
+        vacancyId, academicDegreeId, academicTitleId, scopus,
+        scopusHIndex, scopusLink, research, researchHIndex,
+        researchLink, googleScholar, googleScholarHIndex, orcid,
+        experience, scientificInterests, education, userId
+    ) {
+        return axios.put(API_PROF_INFO_URL + "update/id/" + userId, {
+            vacancyId, academicDegreeId, academicTitleId, scopus,
+            scopusHIndex, scopusLink, research, researchHIndex,
+            researchLink, googleScholar, googleScholarHIndex, orcid,
+            experience, scientificInterests, education
+        }, {headers: authHeader()});
+    }
 
     createArticle(formValues) {
         return axios.post(API_ARTICLE_URL + "create/all", formValues, {headers: authHeader()});
@@ -68,8 +81,28 @@ class ProfileService {
 
 
 
-    getRequestById(id) {
-        return axios.get(API_REQUEST_URL + "get/user/id/" + id , {headers: authHeader()});
+    getIsUPI(id) {
+        return axios.get(API_PROF_INFO_URL + "get/is-valid-user/id/" + id, {headers: authHeader()});
+    }
+    getUPIById(id) {
+        return axios.get(API_PROF_INFO_URL + "get/user/id/" + id , {headers: authHeader()});
+    }
+    getMyArticles() {
+        return axios.get(API_ARTICLE_URL + "get/my-articles", {headers: authHeader()});
+    }
+    getMyCertificates() {
+        return axios.get(API_CERTIFICATE_URL + "get/my-certificates", {headers: authHeader()});
+    }
+    getMyDocuments() {
+        return axios.get(API_DOCUMENT_URL + "get/my-documents", {headers: authHeader()});
+    }
+
+
+
+
+
+    getMyRequest() {
+        return axios.get(API_REQUEST_URL + "get/my-request" , {headers: authHeader()});
     }
 
     getProjectType() {

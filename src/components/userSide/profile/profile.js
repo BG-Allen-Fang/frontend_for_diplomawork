@@ -16,7 +16,7 @@ import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {useEffect} from "react";
 import {Redirect} from "react-router-dom";
-import {getRequestById} from "../../../actions/profile";
+import { getMyRequest} from "../../../actions/userSide/profile";
 
 const theme = createTheme({
     palette: {
@@ -36,7 +36,7 @@ let Profile = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0)
         const {dispatch} = props;
-        dispatch(getRequestById(props.user.id)).then(setDisable(true))
+        dispatch(getMyRequest()).then(setDisable(true))
     },[])
 
     const steps = ['Professional Info', 'Documentation', 'Articles',
@@ -45,7 +45,7 @@ let Profile = (props) => {
     {
         switch (step) {
             case 0:
-                return <UserProfessionalInfo handleNext={handleNext} isDisable={disable}/>;
+                return <UserProfessionalInfo handleNext={handleNext} user={props.user} isDisable={disable}/>;
             case 1:
                 return <UserDocument handleNext={handleNext} isDisable={disable}/>;
             case 2:

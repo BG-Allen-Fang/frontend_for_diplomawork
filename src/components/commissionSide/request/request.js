@@ -104,17 +104,29 @@ const data = [
     { name: "Alen Tyakbayev", degree: "Master", title: "Senior lecturer", vacancy: "Senior lecturer" },
     { name: "Yerassyl Bolat", degree: "PhD", title: "Associated professor", vacancy: "Professor" },
     { name: "Aibyn Sagyndyk", degree: "PhD", title: "Senior lecturer", vacancy: "Associated professor" },
+    { name: "Aniyar Kaliyev", degree: "Bachelor", title: "Teacher", vacancy: "Senior lecturer" },
+    { name: "Alen Tyakbayev", degree: "Master", title: "Senior lecturer", vacancy: "Senior lecturer" },
+    { name: "Yerassyl Bolat", degree: "PhD", title: "Associated professor", vacancy: "Professor" },
+    { name: "Aibyn Sagyndyk", degree: "PhD", title: "Senior lecturer", vacancy: "Associated professor" },
+    { name: "Aniyar Kaliyev", degree: "Bachelor", title: "Teacher", vacancy: "Senior lecturer" },
+    { name: "Alen Tyakbayev", degree: "Master", title: "Senior lecturer", vacancy: "Senior lecturer" },
+    { name: "Yerassyl Bolat", degree: "PhD", title: "Associated professor", vacancy: "Professor" },
+    { name: "Aibyn Sagyndyk", degree: "PhD", title: "Senior lecturer", vacancy: "Associated professor" },
+    { name: "Aniyar Kaliyev", degree: "Bachelor", title: "Teacher", vacancy: "Senior lecturer" },
+    { name: "Alen Tyakbayev", degree: "Master", title: "Senior lecturer", vacancy: "Senior lecturer" },
+    { name: "Yerassyl Bolat", degree: "PhD", title: "Associated professor", vacancy: "Professor" },
+    { name: "Aibyn Sagyndyk", degree: "PhD", title: "Senior lecturer", vacancy: "Associated professor" },
 ];
 
 const options = {
     selectableRows: "none",
 };
 
-const Request = (props) => {
+const Request = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Container component="main" >
+            <Container sx={{mt: 17}} component="main">
                 <MUIDataTable
                     title={"Requests List"}
                     data={data}

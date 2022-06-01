@@ -10,9 +10,9 @@ import {
     ACTIVATION_FAIL,
     PIN_FAIL,
     FORGOT_PASS_SUCCESS, FORGOT_PASS_FAIL, CHANGE_PASS_SUCCESS, CHANGE_PASS_FAIL,
-} from "./types";
+} from "../types";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/userSide/auth.service";
 
 export const register = (name, lastname, patronymic, phone, email, password) => (dispatch) => {
     return AuthService.register(name, lastname, patronymic, phone, email, password).then(

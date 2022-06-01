@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {login} from "../../../actions/auth";
+import {login} from "../../../actions/userSide/auth";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";

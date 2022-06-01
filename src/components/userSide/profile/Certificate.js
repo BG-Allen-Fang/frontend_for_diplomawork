@@ -7,7 +7,8 @@ import Button from "@mui/material/Button";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import CheckIcon from "@mui/icons-material/Check";
-import {certificateCreate} from "../../../actions/profile";
+import {certificateCreate, getMyCertificates} from "../../../actions/userSide/profile";
+import {useEffect} from "react";
 
 const Input = styled('input')({
     display: 'none',
@@ -15,11 +16,7 @@ const Input = styled('input')({
 
 let Certificates = (props) => {
 
-    const [certificateValues, setCertificateValues] = React.useState(
-        [{
-            file: null,
-            name: "",
-        }])
+    const [certificateValues, setCertificateValues] = React.useState([])
 
     let addFormFields = () => {
         setCertificateValues([
@@ -29,6 +26,12 @@ let Certificates = (props) => {
                 name: "",
             }])
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        const {dispatch} = props;
+        dispatch(getMyCertificates())
+    },[])
 
     const handleNextSubmit = () => {
         props.handleNext();
@@ -62,6 +65,41 @@ let Certificates = (props) => {
             </Typography>
 
 
+            {props.myCertificates && props.myCertificates.map((element, index) => (
+                <Grid key={index} container spacing={3} paddingBottom="10px">
+                    <Grid item xs={12} sm={2}>
+                        <Button disabled={true} fullWidth variant="contained" component="label">
+                            Upload
+                            <Input
+                                name={"file"}
+                                accept="image/*"
+                                id="contained-button-file"
+                                hidden
+                                multiple
+                                type="file"/>
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={8}>
+                        <TextField
+                            disabled={true}
+                            value={element.documentsDtoResponse.documentName}
+                            name={"name"}
+                            required
+                            label="Document name"
+                            fullWidth
+                            variant="standard"
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={2}>
+                        {element.file && (
+                            <IconButton variant="contained" color="success">
+                                <CheckIcon></CheckIcon>
+                            </IconButton>
+                        )}
+                    </Grid>
+                    <Divider/>
+                </Grid>
+            ))}
             {certificateValues.map((element, index) => (
                 <Grid key={index} container spacing={3} paddingBottom="10px">
                     <Grid item xs={12} sm={2}>
@@ -127,6 +165,7 @@ function mapStateToProps(state) {
     const {isLoggedIn} = state.auth;
     return {
         isLoggedIn,
+        myCertificates: state.profilePage.myCertificates
     };
 }
 

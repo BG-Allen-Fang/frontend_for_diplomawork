@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {getAllVacancy} from "../../../actions/vacancy";
+import {getAllVacancy} from "../../../actions/userSide/vacancy";
 import Vacancy from "./Vacancy";
 import {withRouter} from "react-router";
 import {useEffect} from "react";

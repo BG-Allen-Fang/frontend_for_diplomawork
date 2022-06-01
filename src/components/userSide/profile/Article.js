@@ -9,25 +9,18 @@ import {connect} from "react-redux";
 import {useEffect} from "react";
 import {
     articleCreate,
-    getArticleType,
-} from "../../../actions/profile";
+    getArticleType, getMyArticles,
+} from "../../../actions/userSide/profile";
 
 let ArticleComponent = (props) => {
 
-    const [formValues, setFormValues] = React.useState([
-        {
-            title: "",
-            apa: "",
-            doi: "",
-            articleTypeId: 1,
-            authors: "",
-            source: ""
-        }])
+    const [formValues, setFormValues] = React.useState([])
 
     useEffect(() => {
         window.scrollTo(0, 0)
         const {dispatch} = props;
-        dispatch(getArticleType())
+        dispatch(getArticleType());
+        dispatch(getMyArticles());
     },[])
 
     let handleChange = (i, e) => {
@@ -67,120 +60,204 @@ let ArticleComponent = (props) => {
 
     return (
         <React.Fragment>
-            <Typography align="center" variant="h6" gutterBottom>
-                Articles
-            </Typography>
+            <Grid>
+                <Typography align="center" variant="h6" gutterBottom>
+                    Articles
+                </Typography>
 
 
-            {formValues.map((element, index) => (
-                <Grid key={index} container spacing={3} borderBottom="thin solid #192F59" marginLeft="-12px" marginTop="10px"
-                      paddingRight="24px" borderRadius="20px" paddingBottom="10px">
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            onChange={ e => handleChange(index, e)}
-                            value={element.title}
-                            name="title"
-                            required
-                            label="Title"
-                            fullWidth
-                            variant="standard"
-                        />
+                {props.myArticles && props.myArticles.map((element, index) => (
+                    <Grid key={index} container spacing={3} borderBottom="thin solid #192F59" marginLeft="-12px" marginTop="10px"
+                          paddingRight="24px" borderRadius="20px" paddingBottom="10px">
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                disabled={true}
+                                value={element.title}
+                                required
+                                label="Title"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                disabled={true}
+                                value={element.apa}
+                                name="apa"
+                                label="APA"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                disabled={true}
+                                value={element.doi}
+                                name="doi"
+                                required
+                                label="DOI"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <FormControl fullWidth>
+                                <InputLabel disabled={true} shrink={true} variant="standard" htmlFor="uncontrolled-native">
+                                    Article Type
+                                </InputLabel>
+                                <NativeSelect
+                                    disabled={true}
+                                    value={element.articleType.id}
+                                    name="articleTypeId"
+                                >
+                                    {props.articleType &&
+                                        props.articleType.map((a) => (
+                                            <option value={a.id} key={a.id}>
+                                                {a.title}
+                                            </option>
+                                        ))
+                                    }
+                                </NativeSelect>
+
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                disabled={true}
+                                value={element.authors}
+                                name="authors"
+                                required
+                                label="Authors"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                disabled={true}
+                                value={element.source}
+                                name="source"
+                                required
+                                label="Source link"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Divider/>
+
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            onChange={ e => handleChange(index, e)}
-                            value={element.apa}
-                            name="apa"
-                            label="APA"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            onChange={ e => handleChange(index, e)}
-                            value={element.doi}
-                            name="doi"
-                            required
-                            label="DOI"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <FormControl fullWidth>
-                            <InputLabel shrink={true} variant="standard" htmlFor="uncontrolled-native">
-                                Article Type
-                            </InputLabel>
-                            <NativeSelect
+                ))}
+
+                {formValues.map((element, index) => (
+                    <Grid key={index} container spacing={3} borderBottom="thin solid #192F59" marginLeft="-12px" marginTop="10px"
+                          paddingRight="24px" borderRadius="20px" paddingBottom="10px">
+                        <Grid item xs={12} sm={4}>
+                            <TextField
                                 onChange={ e => handleChange(index, e)}
-                                value={element.articleTypeId}
-                                name="articleTypeId"
-                            >
-                                {props.articleType &&
-                                    props.articleType.map((a) => (
-                                        <option value={a.id} key={a.id}>
-                                            {a.title}
-                                        </option>
-                                    ))
-                                }
-                            </NativeSelect>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            onChange={ e => handleChange(index, e)}
-                            value={element.authors}
-                            name="authors"
-                            required
-                            label="Authors"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField
-                            onChange={ e => handleChange(index, e)}
-                            value={element.source}
-                            name="source"
-                            required
-                            label="Source link"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Divider/>
+                                value={element.title}
+                                name="title"
+                                required
+                                label="Title"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                onChange={ e => handleChange(index, e)}
+                                value={element.apa}
+                                name="apa"
+                                label="APA"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                onChange={ e => handleChange(index, e)}
+                                value={element.doi}
+                                name="doi"
+                                required
+                                label="DOI"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <FormControl fullWidth>
+                                <InputLabel shrink={true} variant="standard" htmlFor="uncontrolled-native">
+                                    Article Type
+                                </InputLabel>
+                                <NativeSelect
+                                    onChange={ e => handleChange(index, e)}
+                                    value={element.articleTypeId}
+                                    name="articleTypeId"
+                                >
+                                    {props.articleType &&
+                                        props.articleType.map((a) => (
+                                            <option value={a.id} key={a.id}>
+                                                {a.title}
+                                            </option>
+                                        ))
+                                    }
+                                </NativeSelect>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                onChange={ e => handleChange(index, e)}
+                                value={element.authors}
+                                name="authors"
+                                required
+                                label="Authors"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <TextField
+                                onChange={ e => handleChange(index, e)}
+                                value={element.source}
+                                name="source"
+                                required
+                                label="Source link"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
+                        <Divider/>
 
-                </Grid>
-            ))}
-            <Button
-                variant="contained"
-                sx={{mt: 3, ml: 1}}
-                onClick={addFormFields}
-            >
-                Add
-            </Button>
-            <Grid item xs={12} sm={12}>
+                    </Grid>
+                ))}
                 <Button
-                    className="sv-btn"
                     variant="contained"
-                    onClick={handleNextSubmit}
                     sx={{mt: 3, ml: 1}}
+                    onClick={addFormFields}
                 >
-                    Next
+                    Add
                 </Button>
+                <Grid item xs={12} sm={12}>
+                    <Button
+                        className="sv-btn"
+                        variant="contained"
+                        onClick={handleNextSubmit}
+                        sx={{mt: 3, ml: 1}}
+                    >
+                        Next
+                    </Button>
+                </Grid>
             </Grid>
+
         </React.Fragment>
     );
 }
-
-// Intelligence Legal Documents
 
 function mapStateToProps(state) {
     const {isLoggedIn} = state.auth;
     return {
         isLoggedIn,
-        articleType: state.profilePage.articleType
+        articleType: state.profilePage.articleType,
+        myArticles: state.profilePage.myArticles
     };
 }
 

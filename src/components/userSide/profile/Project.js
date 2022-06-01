@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import {Divider, FormControl, InputLabel, NativeSelect} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useEffect} from "react";
-import {createProject, createRequest, getProjectType} from "../../../actions/profile";
+import {createProject, createRequest, getProjectType} from "../../../actions/userSide/profile";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import moment from "moment";
@@ -62,6 +62,7 @@ let Project = (props) => {
         dispatch(createProject(projectValues)).
         then(() => dispatch(createRequest(requestValues)))
     }
+
 
     const handleNextSubmit = () => {
         handleSubmit();

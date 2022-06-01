@@ -1,7 +1,7 @@
 import {
     GET_VACANCY_BY_ID,
     SET_VACANCY
-} from "../../actions/types";
+} from "../../../actions/types";
 
 let initialState = {
     vacancies: []

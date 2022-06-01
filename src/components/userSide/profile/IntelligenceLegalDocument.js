@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import CheckIcon from "@mui/icons-material/Check";
-import {intelligenceLegalDocumentsCreate} from "../../../actions/profile";
+import {intelligenceLegalDocumentsCreate} from "../../../actions/userSide/profile";
 
 const Input = styled('input')({
     display: 'none',

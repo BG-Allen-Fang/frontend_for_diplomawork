@@ -2,9 +2,9 @@ import React from 'react';
 import AppbarCustom from "./AppbarCustom";
 import {connect} from "react-redux";
 import EventBus from "../../../common/EventBus";
-import {logout} from "../../../actions/auth";
+import {logout} from "../../../actions/userSide/auth";
 import {history} from "../../../helpers/history";
-import {clearMessage} from "../../../actions/message";
+import {clearMessage} from "../../../actions/userSide/message";
 
 class AppbarContainer extends React.Component {
 
@@ -12,7 +12,7 @@ class AppbarContainer extends React.Component {
         super(props);
         this.logOut = this.logOut.bind(this);
 
-        history.listen((location) => {
+        history.listen(() => {
             props.dispatch(clearMessage()); // clear message when changing location
         });
     }

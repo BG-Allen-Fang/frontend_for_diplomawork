@@ -1,5 +1,5 @@
-import VacancyService from "../services/vacancy.service";
-import {GET_VACANCY_BY_ID, SET_VACANCY} from "./types";
+import VacancyService from "../../services/userSide/vacancy.service";
+import {GET_VACANCY_BY_ID, SET_VACANCY} from "../types";
 
 export const getVacancyByIdDispatch = (id) => (dispatch) => {
     return VacancyService.getByIdRequest(id).then(

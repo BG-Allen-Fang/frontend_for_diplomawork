@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {isEmail} from "validator";
 import {connect} from "react-redux";
-import {pin_code, userForgotPass} from "../../../actions/auth";
+import {pin_code, userForgotPass} from "../../../actions/userSide/auth";
 import Form from "react-validation/build/form";
 import {Redirect} from "react-router-dom";
 import {createTheme} from "@mui/material/styles";

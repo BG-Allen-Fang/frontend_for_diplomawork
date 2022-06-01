@@ -11,7 +11,12 @@ import {
     GET_ACADEMIC_TITLE_SUCCESS,
     GET_ARTICLE_TYPE_SUCCESS,
     GET_DEVELOPMENT_TYPE_SUCCESS,
-    GET_PROJECT_TYPE_SUCCESS, GET_REQUEST_BY_ID_SUCCESS,
+    GET_IS_UPI_SUCCESS,
+    GET_MY_ARTICLE_BY_ID_SUCCESS,
+    GET_MY_CERTIFICATES_SUCCESS,
+    GET_MY_DOCUMENTS_SUCCESS, GET_MY_REQUEST_SUCCESS,
+    GET_PROJECT_TYPE_SUCCESS,
+    GET_UPI_BY_ID_SUCCESS,
     INTELLIGENCE_LEGAL_DOCUMENTS_CREATE_FAIL,
     INTELLIGENCE_LEGAL_DOCUMENTS_CREATE_SUCCESS,
     PROJECT_CREATE_FAIL,
@@ -20,11 +25,13 @@ import {
     REQUEST_CREATE_SUCCESS,
     SET_MESSAGE,
     USER_PROFESSIONAL_INFO_CREATE_FAIL,
-    USER_PROFESSIONAL_INFO_CREATE_SUCCESS
+    USER_PROFESSIONAL_INFO_CREATE_SUCCESS,
+    USER_PROFESSIONAL_INFO_UPDATE_FAIL,
+    USER_PROFESSIONAL_INFO_UPDATE_SUCCESS
 
-} from "./types";
+} from "../types";
 
-import ProfileService from "../services/profile.service";
+import ProfileService from "../../services/userSide/profile.service";
 
 export const documentCreate = (cv, passport, photo) => (dispatch) => {
     const formData = new FormData();
@@ -146,68 +153,61 @@ export const certificateCreate = (name, data) => (dispatch) => {
     );
 };
 
-export const userProfessionalInfoCreate = (
-    vacancyId,
-    academicDegreeId,
-    academicTitleId,
-    scopus,
-    scopusHIndex,
-    scopusLink,
-    research,
-    researchHIndex,
-    researchLink,
-    googleScholar,
-    googleScholarHIndex,
-    orcid,
-    experience,
-    scientificInterests,
-    education
+
+export const userProfessionalInfoUpdate = (
+    vacancyId, academicDegreeId, academicTitleId, scopus,
+    scopusHIndex, scopusLink, research, researchHIndex,
+    researchLink, googleScholar, googleScholarHIndex, orcid,
+    experience, scientificInterests, education, userId
 ) => (dispatch) => {
-    return ProfileService.createUserProfessionalInfo(
-        vacancyId,
-        academicDegreeId,
-        academicTitleId,
-        scopus,
-        scopusHIndex,
-        scopusLink,
-        research,
-        researchHIndex,
-        researchLink,
-        googleScholar,
-        googleScholarHIndex,
-        orcid,
-        experience,
-        scientificInterests,
-        education
+    return ProfileService.userProfessionalInfoUpdate(
+        vacancyId, academicDegreeId, academicTitleId, scopus,
+        scopusHIndex, scopusLink, research, researchHIndex,
+        researchLink, googleScholar, googleScholarHIndex, orcid,
+        experience, scientificInterests, education, userId
     ).then(
         (response) => {
-            dispatch({
-                type: USER_PROFESSIONAL_INFO_CREATE_SUCCESS,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            dispatch({type: USER_PROFESSIONAL_INFO_UPDATE_SUCCESS,});
+            dispatch({type: SET_MESSAGE, payload: response.data.message,});
             return Promise.resolve();
         },
         (error) => {
             const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message || error.toString();
 
-            dispatch({
-                type: USER_PROFESSIONAL_INFO_CREATE_FAIL,
-            });
+            dispatch({type: USER_PROFESSIONAL_INFO_UPDATE_FAIL,});
+            dispatch({type: SET_MESSAGE, payload: message,});
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
+            return Promise.reject();
+        }
+    );
+};
+
+export const userProfessionalInfoCreate = (
+    vacancyId, academicDegreeId, academicTitleId, scopus,
+    scopusHIndex, scopusLink, research, researchHIndex,
+    researchLink, googleScholar, googleScholarHIndex, orcid,
+    experience, scientificInterests, education
+) => (dispatch) => {
+    return ProfileService.createUserProfessionalInfo(
+        vacancyId, academicDegreeId, academicTitleId, scopus,
+        scopusHIndex, scopusLink, research, researchHIndex,
+        researchLink, googleScholar, googleScholarHIndex, orcid,
+        experience, scientificInterests, education
+    ).then(
+        (response) => {
+            dispatch({type: USER_PROFESSIONAL_INFO_CREATE_SUCCESS,});
+            dispatch({type: SET_MESSAGE, payload: response.data.message,});
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message || error.toString();
+
+            dispatch({type: USER_PROFESSIONAL_INFO_CREATE_FAIL,});
+            dispatch({type: SET_MESSAGE, payload: message,});
 
             return Promise.reject();
         }
@@ -305,12 +305,65 @@ export const createProject = (formValues) => (dispatch) => {
 };
 
 
-
-export const getRequestById = (id) => (dispatch) => {
-    return ProfileService.getRequestById(id).then(
+export const getUPIById = (id) => (dispatch) => {
+    return ProfileService.getUPIById(id).then(
         (response) => {
             dispatch({
-                type: GET_REQUEST_BY_ID_SUCCESS,
+                type: GET_UPI_BY_ID_SUCCESS,
+                payload: response.data,
+            });
+            return response.data;
+        })
+}
+
+export const getIsUPI = (id) => (dispatch) => {
+    return ProfileService.getIsUPI(id).then(
+        (response) => {
+            dispatch({
+                type: GET_IS_UPI_SUCCESS,
+                payload: response.data,
+            });
+            return response.data;
+        })
+}
+
+
+
+export const getMyDocuments = () => (dispatch) => {
+    return ProfileService.getMyDocuments().then(
+        (response) => {
+            dispatch({
+                type: GET_MY_DOCUMENTS_SUCCESS,
+                payload: response.data,
+            });
+            return Promise.resolve();
+        })
+}
+export const getMyCertificates = () => (dispatch) => {
+    return ProfileService.getMyCertificates().then(
+        (response) => {
+            dispatch({
+                type: GET_MY_CERTIFICATES_SUCCESS,
+                payload: response.data,
+            });
+            return Promise.resolve();
+        })
+}
+export const getMyArticles = () => (dispatch) => {
+    return ProfileService.getMyArticles().then(
+        (response) => {
+            dispatch({
+                type: GET_MY_ARTICLE_BY_ID_SUCCESS,
+                payload: response.data,
+            });
+            return Promise.resolve();
+        })
+}
+export const getMyRequest = () => (dispatch) => {
+    return ProfileService.getMyRequest().then(
+        (response) => {
+            dispatch({
+                type: GET_MY_REQUEST_SUCCESS,
                 payload: response.data,
             });
             return Promise.resolve();

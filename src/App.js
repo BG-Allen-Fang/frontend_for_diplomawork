@@ -10,7 +10,7 @@ import VacancyContainer from "./components/userSide/Vacancy/VacancyContainer";
 import AppbarContainer from "./components/elements/appbar_custom/AppbarContainer";
 import {Component} from "react";
 import EventBus from "./common/EventBus";
-import {clearMessage} from "./actions/message";
+import {clearMessage} from "./actions/userSide/message";
 import {history} from "./helpers/history";
 import {connect} from "react-redux";
 

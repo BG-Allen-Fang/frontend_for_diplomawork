@@ -5,8 +5,14 @@ import TextField from '@mui/material/TextField';
 import {FormControl, InputLabel, NativeSelect} from "@mui/material";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
-import {getAllVacancy} from "../../../actions/vacancy";
-import {getAcademicDegree, getAcademicTitle, userProfessionalInfoCreate} from "../../../actions/profile";
+import {getAllVacancy} from "../../../actions/userSide/vacancy";
+import {
+    getAcademicDegree,
+    getAcademicTitle,
+    getIsUPI,
+    getUPIById,
+    userProfessionalInfoCreate, userProfessionalInfoUpdate
+} from "../../../actions/userSide/profile";
 import {useEffect} from "react";
 import Button from "@mui/material/Button";
 import "./profile.css"
@@ -30,6 +36,7 @@ let UserProfessionalInfo = (props) => {
         education: "",
 
         location: props.location,
+        isExist: false,
         loading: false,
     });
 
@@ -39,15 +46,40 @@ let UserProfessionalInfo = (props) => {
         dispatch(getAllVacancy())
         dispatch(getAcademicDegree())
         dispatch(getAcademicTitle())
-        if (values.location.state) {
-            setValues({
-                ...values,
-                vacancyId: values.location.state.vacancy.id
-            });
-        }
-    },[])
+        dispatch(getIsUPI(props.user.id)).then((res) => {
+            if (res) {
+                dispatch(getUPIById(props.user.id)).then((res) => {
+                    setValues({
+                        ...values,
+                        isExist: true,
+
+                        vacancyId: res.vacancy.id,
+                        academicDegreeId: res.academicDegree.id,
+                        academicTitleId: res.academicTitle.id,
+                        scopus: res.scopus,
+                        scopusHIndex: res.scopusHIndex,
+                        scopusLink: res.scopusLink,
+                        research: res.research,
+                        researchHIndex: res.researchHIndex,
+                        researchLink: res.researchLink,
+                        googleScholar: res.googleScholar,
+                        googleScholarHIndex: res.googleScholarHIndex,
+                        orcid: res.orcid,
+                        experience: res.experience,
+                        scientificInterests: res.scientificInterests,
+                        education: res.education,
+                    })
+                })
+            } else if (values.location.state) {
+                setValues({
+                    ...values,
+                    vacancyId: values.location.state.vacancy.id
+                });
+            }
+        })
 
 
+    }, [])
 
     const handleChange = (props) => (event) => {
         setValues({
@@ -57,7 +89,10 @@ let UserProfessionalInfo = (props) => {
     };
 
     const handleNextSubmit = () => {
-        handleSubmit();
+        values.isExist?
+            handleUpdate():
+            handleSubmit()
+
         props.handleNext();
     };
 
@@ -79,20 +114,41 @@ let UserProfessionalInfo = (props) => {
             values.experience,
             values.scientificInterests,
             values.education,
+
         ))
     };
 
-    return (
+    const handleUpdate = () => {
+        const {dispatch} = props;
+        dispatch(userProfessionalInfoUpdate(
+            values.vacancyId,
+            values.academicDegreeId,
+            values.academicTitleId,
+            values.scopus,
+            values.scopusHIndex,
+            values.scopusLink,
+            values.research,
+            values.researchHIndex,
+            values.researchLink,
+            values.googleScholar,
+            values.googleScholarHIndex,
+            values.orcid,
+            values.experience,
+            values.scientificInterests,
+            values.education,
 
+            props.UPIById.id,
+        ))
+    };
+
+    //UPIById
+
+    return (
         <React.Fragment>
             <Typography align="center" variant="h6" gutterBottom>
                 Professional Information
             </Typography>
-            <Grid container spacing={
-                4
-            }
-
-            >
+            <Grid container spacing={4}>
                 <Grid item xs={12}>
                     <FormControl fullWidth>
 
@@ -280,7 +336,7 @@ let UserProfessionalInfo = (props) => {
                         className="sv-btn"
                         variant="contained"
                         onClick={handleNextSubmit}
-                        sx={{ mt: 3, ml: 1 }}
+                        sx={{mt: 3, ml: 1}}
                     >
                         Next
                     </Button>
@@ -294,7 +350,8 @@ function mapStateToProps(state) {
     return {
         vacancies: state.vacancyPage.vacancies,
         academicDegree: state.profilePage.academicDegree,
-        academicTitle: state.profilePage.academicTitle
+        academicTitle: state.profilePage.academicTitle,
+        UPIById: state.profilePage.UPIById,
     };
 }
 

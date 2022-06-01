@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import {Divider, FormControl, InputLabel, NativeSelect} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useEffect} from "react";
-import {developmentCreate, getDevelopmentType} from "../../../actions/profile";
+import {developmentCreate, getDevelopmentType} from "../../../actions/userSide/profile";
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 

@@ -5,7 +5,7 @@ import {IconButton, Stack, styled} from "@mui/material";
 import Button from "@mui/material/Button";
 import CheckIcon from '@mui/icons-material/Check';
 import {connect} from "react-redux";
-import {documentCreate} from "../../../actions/profile";
+import {documentCreate, getMyDocuments} from "../../../actions/userSide/profile";
 import {useEffect} from "react";
 
 const Input = styled('input')({
@@ -13,7 +13,6 @@ const Input = styled('input')({
 });
 
 let UserDocument = (props) => {
-
 
     const [values, setValues] = React.useState({
         cv: null,
@@ -27,10 +26,11 @@ let UserDocument = (props) => {
         props.handleNext();
     };
 
-
-    useEffect(()=>{
+    useEffect(() => {
         window.scrollTo(0, 0)
-    })
+        const {dispatch} = props;
+        dispatch(getMyDocuments())
+    },[])
 
     const handleFileChange = (props) => (event) => {
         setValues({
@@ -122,7 +122,8 @@ let UserDocument = (props) => {
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.auth.isLoggedIn,
-    user: state.auth.user
+    user: state.auth.user,
+    myDocuments: state.profilePage.myDocuments,
 });
 
 export default connect(mapStateToProps)(UserDocument);
